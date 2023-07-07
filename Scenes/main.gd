@@ -6,11 +6,13 @@ const LINE = preload("res://line.tscn")
 const TRACKS = 5
 const line_height = 20
 const track_height = (720 - line_height*(TRACKS-1)) / TRACKS  
+var multiplier = 2
 
-var stats = {
-	'family': 0,
-	'friends': 0,
-	'work': 0
+@onready var stats = {
+	'family': 800,
+	'friends': 800,
+	'work': 800,
+	'energy': 800
 }
 
 var is_setup = false
@@ -24,6 +26,10 @@ func _process(delta):
 	if Input.is_action_just_pressed("Spawn"):
 		spawn_event()
 	
+	for type in global.TYPES:
+		get_node("Stats/"+type+"/Bar").value = stats[type]
+	$Stats/energy/Bar.value = stats['energy']
+
 func setup():
 	# Spawn lanes based on number of tracks
 	for i in TRACKS:
@@ -50,3 +56,22 @@ func spawn_event():
 		# event_instance.get_node('Button').set_size(Vector2(700, track_height))
 		event_instance.position = get_node('Calendar/Lane' + str(available[randi() % available.size()])).position
 		$Events.add_child(event_instance)
+
+
+func _on_timer_timeout():
+	var areas = $Calendar/Point_check.get_overlapping_areas()
+	for type in global.TYPES:
+		stats[type] -= 0.5 * multiplier
+		stats[type] = min(stats[type], 1000)
+		stats[type] = max(stats[type], 0)
+		stats['energy'] = min(stats['energy'], 1000)
+		stats['energy'] = max(stats['energy'], 0)
+	if areas.size() == 0:
+		stats['energy'] += multiplier
+	elif areas.size() == 1:
+		stats[areas[0].get_parent().type] += 3 * multiplier
+		stats['energy'] -= multiplier
+	else:
+		for area in areas:
+			stats[area.get_parent().type] -= 4 * multiplier
+			stats['energy'] -= multiplier
