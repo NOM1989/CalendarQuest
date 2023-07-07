@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://diuvxflrkljjy"]
+[gd_scene load_steps=13 format=3 uid="uid://diuvxflrkljjy"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_h86ou"]
 [ext_resource type="Texture2D" uid="uid://dcyqtitrvstgi" path="res://Sprites/ProgressBarBackground.png" id="2_p4url"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cc8ic57ab7ofa" path="res://Sprites/ProgressBarGreen.png" id="5_iow3p"]
 [ext_resource type="Texture2D" uid="uid://bf0flmglfgci6" path="res://Sprites/ProgressBarGrey.png" id="6_kdbwt"]
 [ext_resource type="Texture2D" uid="uid://luscbxuxym3p" path="res://Sprites/ProgressBarBlue.png" id="7_8ss6o"]
+[ext_resource type="AudioStream" uid="uid://7gukpknu1id6" path="res://Sounds/261463__zagi2__metal-jungle.wav" id="8_3advk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1akix"]
 font_size = 50
@@ -224,5 +225,11 @@ autostart = true
 
 [node name="Events" type="Node2D" parent="."]
 scale = Vector2(1.00107, 1)
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_3advk")
+autoplay = true
 
 [connection signal="timeout" from="Calendar/Timer" to="." method="_on_timer_timeout"]

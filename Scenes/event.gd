@@ -28,10 +28,17 @@ func _physics_process(delta):
 
 
 func _on_button_pressed():
-	queue_free()
+	$Area2D.monitorable = false
+	visible = false
+	$AudioStreamPlayer.play()
+	
 
 
 
 func _on_area_2d_area_exited(area):
 	if area.name == 'Calendar':
 		queue_free()
+
+
+func _on_audio_stream_player_finished():
+	queue_free()
