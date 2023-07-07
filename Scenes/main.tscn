@@ -12,14 +12,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_1akix"]
 font_size = 50
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkm4w"]
-size = Vector2(9, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8ti3"]
-size = Vector2(1920, 600)
+size = Vector2(1920, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbc20"]
-size = Vector2(20, 600)
+size = Vector2(20, 720)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h86ou")
@@ -133,90 +130,35 @@ text = "Energy
 label_settings = SubResource("LabelSettings_1akix")
 
 [node name="Calendar" type="Node2D" parent="."]
-position = Vector2(0, 50)
 
 [node name="Paper" type="ColorRect" parent="Calendar"]
-offset_top = 350.0
+offset_top = 360.0
 offset_right = 1920.0
-offset_bottom = 950.0
+offset_bottom = 1080.0
 color = Color(0.933333, 0.952941, 0.807843, 1)
-
-[node name="Line1" type="ColorRect" parent="Calendar"]
-offset_top = 485.0
-offset_right = 1920.0
-offset_bottom = 505.0
-color = Color(0.74902, 0.717647, 0.568627, 1)
-
-[node name="Line2" type="ColorRect" parent="Calendar"]
-offset_top = 640.0
-offset_right = 1920.0
-offset_bottom = 660.0
-color = Color(0.74902, 0.717647, 0.568627, 1)
-
-[node name="Line3" type="ColorRect" parent="Calendar"]
-offset_top = 795.0
-offset_right = 1920.0
-offset_bottom = 815.0
-color = Color(0.74902, 0.717647, 0.568627, 1)
-
-[node name="Lane1" type="Node2D" parent="Calendar"]
-position = Vector2(1920, 417.5)
-
-[node name="Area2D" type="Area2D" parent="Calendar/Lane1"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Lane1/Area2D"]
-position = Vector2(5.5, 0)
-shape = SubResource("RectangleShape2D_nkm4w")
-
-[node name="Lane2" type="Node2D" parent="Calendar"]
-position = Vector2(1920, 572.5)
-
-[node name="Area2D" type="Area2D" parent="Calendar/Lane2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Lane2/Area2D"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_nkm4w")
-
-[node name="Lane3" type="Node2D" parent="Calendar"]
-position = Vector2(1920, 727.5)
-
-[node name="Area2D" type="Area2D" parent="Calendar/Lane3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Lane3/Area2D"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_nkm4w")
-
-[node name="Lane4" type="Node2D" parent="Calendar"]
-position = Vector2(1920, 882.5)
-
-[node name="Area2D" type="Area2D" parent="Calendar/Lane4"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Lane4/Area2D"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_nkm4w")
 
 [node name="Calendar" type="Area2D" parent="Calendar"]
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Calendar"]
-position = Vector2(960, 650)
+position = Vector2(960, 720)
 shape = SubResource("RectangleShape2D_p8ti3")
 
 [node name="Point_check" type="Area2D" parent="Calendar"]
-position = Vector2(55, 650)
 collision_layer = 2
 collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Calendar/Point_check"]
+position = Vector2(55, 720)
 shape = SubResource("RectangleShape2D_mbc20")
 
 [node name="ColorRect" type="ColorRect" parent="Calendar"]
 z_index = 1
 offset_left = 45.0
-offset_top = 350.0
+offset_top = 360.0
 offset_right = 65.0
-offset_bottom = 950.0
+offset_bottom = 1080.0
 color = Color(1, 0, 0, 0.776471)
 
 [node name="Timer" type="Timer" parent="Calendar"]

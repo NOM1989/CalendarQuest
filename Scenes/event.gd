@@ -23,17 +23,13 @@ func _ready():
 
 func _physics_process(delta):
 	velocity.x = -speed
-
 	move_and_slide()
-
 
 func _on_button_pressed():
 	$Area2D.monitorable = false
 	visible = false
 	$AudioStreamPlayer.play()
 	
-
-
 
 func _on_area_2d_area_exited(area):
 	if area.name == 'Calendar':
