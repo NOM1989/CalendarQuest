@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://diuvxflrkljjy"]
+[gd_scene load_steps=14 format=3 uid="uid://diuvxflrkljjy"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_h86ou"]
 [ext_resource type="Texture2D" uid="uid://dcyqtitrvstgi" path="res://Sprites/ProgressBarBackground.png" id="2_p4url"]
@@ -7,7 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cc8ic57ab7ofa" path="res://Sprites/ProgressBarGreen.png" id="5_iow3p"]
 [ext_resource type="Texture2D" uid="uid://bf0flmglfgci6" path="res://Sprites/ProgressBarGrey.png" id="6_kdbwt"]
 [ext_resource type="Texture2D" uid="uid://luscbxuxym3p" path="res://Sprites/ProgressBarBlue.png" id="7_8ss6o"]
-[ext_resource type="AudioStream" uid="uid://7gukpknu1id6" path="res://Sounds/261463__zagi2__metal-jungle.wav" id="8_3advk"]
+[ext_resource type="AudioStream" uid="uid://dbhurrihq47g0" path="res://Sounds/393489__sirplus__denseintenseloop16.wav" id="8_77jvf"]
+[ext_resource type="AudioStream" uid="uid://dl725ieh8fnvd" path="res://Sounds/494135__petebarry__fx_electronic_warning.wav" id="9_3x355"]
+
+[sub_resource type="Environment" id="Environment_y212t"]
+background_mode = 3
+glow_hdr_threshold = 1.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_1akix"]
 font_size = 50
@@ -21,13 +26,16 @@ size = Vector2(20, 720)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h86ou")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y212t")
+
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.219608, 0.486275, 0.682353, 1)
 
 [node name="Stats" type="Node2D" parent="."]
-position = Vector2(623, 67)
+position = Vector2(623, 45)
 
 [node name="family" type="Node2D" parent="Stats"]
 position = Vector2(600, 0)
@@ -170,8 +178,12 @@ scale = Vector2(1.00107, 1)
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("8_3advk")
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_77jvf")
+volume_db = -10.0
 autoplay = true
+
+[node name="Alarm" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_3x355")
 
 [connection signal="timeout" from="Calendar/Timer" to="." method="_on_timer_timeout"]

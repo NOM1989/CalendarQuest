@@ -3,24 +3,20 @@ extends Node2D
 const EVENT = preload("res://Scenes/event.tscn")
 const LANE = preload("res://lane.tscn")
 const LINE = preload("res://line.tscn")
-const TRACKS = 5
+const TRACKS = 6
 const line_height = 20
 const track_height = (720 - line_height*(TRACKS-1)) / TRACKS  
-var multiplier = 2
-
+var multiplier = 2  
+ 
 @onready var stats = {
-	'family': 800,
+	'family': 800,   
 	'friends': 800,
-	'work': 800,
+	'work': 800,      
 	'energy': 800
 }
 
-var is_setup = false
 
 func _process(delta):
-	if not is_setup:
-		setup()
-		is_setup = true
 	if Input.is_action_just_pressed("Exit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("Spawn"):
@@ -30,7 +26,7 @@ func _process(delta):
 		get_node("Stats/"+type+"/Bar").value = stats[type]
 	$Stats/energy/Bar.value = stats['energy']
 
-func setup():
+func _ready():
 	# Spawn lanes based on number of tracks
 	for i in TRACKS:
 		var new_line = LINE.instantiate()
@@ -51,10 +47,9 @@ func spawn_event():
 		if !get_node('Calendar/Lane'+str(i+1)+'/Area2D').has_overlapping_areas():
 			available.append(i+1)
 	if available.size() > 0:
-		# Eliot problem:
-		# event_instance.get_node('ColorRect').set_size(Vector2(700, track_height))
-		# event_instance.get_node('Button').set_size(Vector2(700, track_height))
+		event_instance.height = track_height + 1
 		event_instance.position = get_node('Calendar/Lane' + str(available[randi() % available.size()])).position
+		event_instance.tracks = TRACKS
 		$Events.add_child(event_instance)
 
 

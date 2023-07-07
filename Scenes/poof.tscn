@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgj1nv4n0su8p"]
+
+[ext_resource type="Texture2D" uid="uid://2m8l1aj2hwt6" path="res://Sprites/Square.png" id="1_kt6of"]
+[ext_resource type="Script" path="res://Scenes/poof.gd" id="2_b44ig"]
+
+[sub_resource type="Curve" id="Curve_gu537"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 1, Vector2(0.126506, 200), 0.0, 0.0, 0, 0, Vector2(0.144578, 14.7368), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ovfn1"]
+curve = SubResource("Curve_gu537")
+
+[sub_resource type="Curve" id="Curve_tf4ky"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.253012, 1), 0.0, 0.0, 0, 0, Vector2(0.560241, 0.0105263), 0.0, 0.0, 0, 0, Vector2(1, 0.0631579), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rxpir"]
+curve = SubResource("Curve_tf4ky")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg8ge"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 52.63
+initial_velocity_max = 273.68
+angular_velocity_min = -106.11
+angular_velocity_max = 242.53
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = 1.0
+radial_accel_max = 1.0
+radial_accel_curve = SubResource("CurveTexture_ovfn1")
+scale_curve = SubResource("CurveTexture_rxpir")
+
+[node name="Poof" type="GPUParticles2D"]
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_tg8ge")
+texture = ExtResource("1_kt6of")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+randomness = 0.64
+script = ExtResource("2_b44ig")
