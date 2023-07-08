@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://diuvxflrkljjy"]
+[gd_scene load_steps=15 format=3 uid="uid://diuvxflrkljjy"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_h86ou"]
 [ext_resource type="Texture2D" uid="uid://dcyqtitrvstgi" path="res://Sprites/ProgressBarBackground.png" id="2_p4url"]
@@ -22,6 +22,12 @@ size = Vector2(1920, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbc20"]
 size = Vector2(20, 720)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c71qy"]
+font_size = 20
+font_color = Color(1, 0, 1, 1)
+outline_size = 2
+outline_color = Color(1, 0, 1, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h86ou")
@@ -112,11 +118,11 @@ text = "Work
 "
 label_settings = SubResource("LabelSettings_1akix")
 
-[node name="energy" type="Node2D" parent="Stats"]
+[node name="rest" type="Node2D" parent="Stats"]
 position = Vector2(600, 270)
 metadata/_edit_group_ = true
 
-[node name="Bar" type="TextureProgressBar" parent="Stats/energy"]
+[node name="Bar" type="TextureProgressBar" parent="Stats/rest"]
 offset_left = 32.0
 offset_top = -30.0
 offset_right = 672.0
@@ -128,12 +134,12 @@ texture_over = ExtResource("3_a0cvd")
 texture_progress = ExtResource("7_8ss6o")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Stats/energy"]
+[node name="Label" type="Label" parent="Stats/rest"]
 offset_left = -160.0
 offset_top = -37.0
 offset_right = 6.0
 offset_bottom = 35.0
-text = "Energy
+text = "Rest
 "
 label_settings = SubResource("LabelSettings_1akix")
 
@@ -173,6 +179,16 @@ color = Color(1, 0, 0, 0.776471)
 wait_time = 0.05
 autostart = true
 
+[node name="double" type="Node2D" parent="Calendar"]
+
+[node name="Label" type="Label" parent="Calendar/double"]
+z_index = 1
+offset_left = -40.0
+offset_top = -15.5
+offset_bottom = 15.5
+text = "2x"
+label_settings = SubResource("LabelSettings_c71qy")
+
 [node name="Events" type="Node2D" parent="."]
 scale = Vector2(1.00107, 1)
 
@@ -180,7 +196,7 @@ scale = Vector2(1.00107, 1)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("8_77jvf")
-volume_db = -10.0
+volume_db = -30.0
 autoplay = true
 
 [node name="Alarm" type="AudioStreamPlayer" parent="Sounds"]
