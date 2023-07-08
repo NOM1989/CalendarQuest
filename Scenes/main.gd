@@ -3,7 +3,7 @@ extends Node2D
 const EVENT = preload("res://Scenes/event.tscn")
 const LANE = preload("res://lane.tscn")
 const LINE = preload("res://line.tscn")
-const TRACKS = 6
+const TRACKS = 1
 const line_height = 20
 const track_height = (720 - line_height*(TRACKS-1)) / TRACKS  
 var multiplier = 2  
