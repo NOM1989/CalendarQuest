@@ -7,7 +7,8 @@ var speed : int = 500
 var length : int = 500
 var height : int
 var colour
-var tracks
+var TRACKS
+var LANE # Which lane this event is in
 
 func _ready():
 	randomize()
@@ -27,7 +28,7 @@ func _ready():
 	$ColorRect.color = colour
 	randomize()     
 	$Label.text = global.LABELS[type][randi() % global.LABELS[type].size()]#
-	$Label.label_settings.set_font_size(min(44, 240/tracks))
+	$Label.label_settings.set_font_size(min(44, 240/TRACKS))
 
 func _physics_process(delta):
 	velocity.x = -speed
