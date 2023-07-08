@@ -43,6 +43,7 @@ func _on_button_pressed():
 	get_parent().add_child(poof_instance)
 	$Area2D.monitorable = false
 	visible = false
+	$AudioStreamPlayer.volume_db = global.volume*0.5 - 40
 	$AudioStreamPlayer.play()
 	
 
