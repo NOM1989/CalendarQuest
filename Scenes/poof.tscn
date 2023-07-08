@@ -36,6 +36,7 @@ radial_accel_curve = SubResource("CurveTexture_ovfn1")
 scale_curve = SubResource("CurveTexture_rxpir")
 
 [node name="Poof" type="GPUParticles2D"]
+emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_tg8ge")
 texture = ExtResource("1_kt6of")

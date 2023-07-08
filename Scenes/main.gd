@@ -13,12 +13,13 @@ var multiplier = 2
 	'friends': 800,
 	'work': 800,      
 	'energy': 800
-}
+} 
 
 
 func _process(delta):
 	if Input.is_action_just_pressed("Exit"):
-		get_tree().quit()
+		$PauseMenu.show()
+		get_tree().paused = true
 	if Input.is_action_just_pressed("Spawn"):
 		spawn_event()
 	
@@ -27,7 +28,7 @@ func _process(delta):
 	$Stats/energy/Bar.value = stats['energy']
 
 func _ready():
-	# Spawn lanes based on number of tracks
+	$PauseMenu.hide()
 	for i in TRACKS:
 		var new_line = LINE.instantiate()
 		$Calendar.add_child(new_line)
@@ -70,3 +71,14 @@ func _on_timer_timeout():
 		for area in areas:
 			stats[area.get_parent().type] -= 4 * multiplier
 			stats['energy'] -= multiplier
+
+
+func _on_exit_pressed():
+	get_tree().quit()
+
+
+func _on_resume_pressed():
+	global.volume = $PauseMenu/HSlider.value
+	$Sounds/BackgroundMusic.volume_db = global.volume*0.5 - 50
+	$PauseMenu.hide()
+	get_tree().paused = false
