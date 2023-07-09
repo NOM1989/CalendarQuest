@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://crrrxo652cnbb"]
+
+[ext_resource type="Script" path="res://Scenes/menu.gd" id="1_4rp8a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dtww3"]
+font_size = 160
+
+[node name="Menu" type="Node"]
+script = ExtResource("1_4rp8a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.219608, 0.486275, 0.682353, 1)
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 1657.0
+offset_top = 923.0
+offset_right = 1891.0
+offset_bottom = 1060.0
+theme_override_font_sizes/font_size = 64
+text = "Exit"
+
+[node name="Play" type="Button" parent="."]
+offset_left = 460.0
+offset_top = 321.0
+offset_right = 1483.0
+offset_bottom = 799.0
+theme_override_font_sizes/font_size = 100
+text = "Play"
+
+[node name="How to play" type="Button" parent="."]
+offset_left = 38.0
+offset_top = 918.0
+offset_right = 472.0
+offset_bottom = 1054.0
+theme_override_font_sizes/font_size = 64
+text = "How to play"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -591.0
+offset_top = 17.0
+offset_right = 607.0
+offset_bottom = 239.0
+grow_horizontal = 2
+text = "Calendar Quest"
+label_settings = SubResource("LabelSettings_dtww3")
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 89.0
+offset_top = 501.0
+offset_right = 395.0
+offset_bottom = 517.0
+min_value = 1.0
+max_value = 6.0
+value = 4.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 148.0
+offset_top = 401.0
+offset_right = 332.0
+offset_bottom = 459.0
+theme_override_font_sizes/font_size = 40
+text = "Difficulty:"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="How to play" to="." method="_on_how_to_play_pressed"]

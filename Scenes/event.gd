@@ -9,6 +9,7 @@ var height : int
 var colour
 var TRACKS
 var LANE # Which lane this event is in
+var special
 
 func _ready():
 	randomize()
@@ -26,8 +27,12 @@ func _ready():
 	elif type == 'work':
 		colour = Color(0.26, 0.26, 0.26, 1.0)
 	$ColorRect.color = colour
-	randomize()     
-	$Label.text = global.LABELS[type][randi() % global.LABELS[type].size()]#
+	randomize()
+	if special:
+		$Label.text = global.SPECIAL_LABELS[type][randi() % global.SPECIAL_LABELS[type].size()]
+		$Label.modulate = Color(1,0.11,0.11,1)
+	else:
+		$Label.text = global.LABELS[type][randi() % global.LABELS[type].size()]
 	$Label.label_settings.set_font_size(min(44, 240/TRACKS))
 
 func _physics_process(delta):
@@ -35,6 +40,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_button_pressed():
+	if special:
+		get_parent().get_parent().stats[type] -= 100
+		get_parent().get_parent().screen_shake()
+		return
 	var poof_instance = POOF.instantiate()
 	poof_instance.position = position + Vector2(length/2, 0)
 	poof_instance.modulate = colour
@@ -45,6 +54,9 @@ func _on_button_pressed():
 	visible = false
 	$AudioStreamPlayer.volume_db = global.volume*0.5 - 40
 	$AudioStreamPlayer.play()
+	for area in $Area2D.get_overlapping_areas():
+		if area.name == "Point_check":
+			get_parent().get_parent().stats[type] -= 100
 	
 
 func _on_area_2d_area_exited(area):

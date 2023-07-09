@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diuvxflrkljjy"]
+[gd_scene load_steps=25 format=3 uid="uid://diuvxflrkljjy"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_h86ou"]
 [ext_resource type="Texture2D" uid="uid://dcyqtitrvstgi" path="res://Sprites/ProgressBarBackground.png" id="2_p4url"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cc8ic57ab7ofa" path="res://Sprites/ProgressBarGreen.png" id="5_iow3p"]
 [ext_resource type="Texture2D" uid="uid://bf0flmglfgci6" path="res://Sprites/ProgressBarGrey.png" id="6_kdbwt"]
 [ext_resource type="Texture2D" uid="uid://luscbxuxym3p" path="res://Sprites/ProgressBarBlue.png" id="7_8ss6o"]
+[ext_resource type="Texture2D" uid="uid://c2grobbfp7oqp" path="res://Sprites/x2.png" id="8_0nqm3"]
 [ext_resource type="AudioStream" uid="uid://dbhurrihq47g0" path="res://Sounds/393489__sirplus__denseintenseloop16.wav" id="8_77jvf"]
 [ext_resource type="AudioStream" uid="uid://dl725ieh8fnvd" path="res://Sounds/494135__petebarry__fx_electronic_warning.wav" id="9_3x355"]
+[ext_resource type="AudioStream" uid="uid://7gukpknu1id6" path="res://Sounds/261463__zagi2__metal-jungle.wav" id="9_hgvws"]
+[ext_resource type="Texture2D" uid="uid://bepjnikm4ir6d" path="res://Sprites/Light.png" id="12_mswrh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1akix"]
 font_size = 50
@@ -19,11 +22,66 @@ size = Vector2(1920, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbc20"]
 size = Vector2(20, 720)
 
-[sub_resource type="LabelSettings" id="LabelSettings_c71qy"]
-font_size = 20
-font_color = Color(1, 0, 1, 1)
-outline_size = 2
-outline_color = Color(1, 0, 1, 1)
+[sub_resource type="Animation" id="Animation_uml58"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.301942]
+}
+
+[sub_resource type="Animation" id="Animation_1lswa"]
+resource_name = "x2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(0.7, 0.7), Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.436332, 0.349066, -0.436332]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pr8ij"]
+_data = {
+"RESET": SubResource("Animation_uml58"),
+"x2": SubResource("Animation_1lswa")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fscmd"]
 bg_color = Color(0.737255, 0.737255, 0.737255, 1)
@@ -34,6 +92,144 @@ corner_detail = 20
 [sub_resource type="LabelSettings" id="LabelSettings_obi2m"]
 font_size = 80
 
+[sub_resource type="Animation" id="Animation_lonu8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sounds/Alarm:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Warning:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mr42t"]
+resource_name = "Warning"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sounds/Alarm:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Warning:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.396078), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yta7o"]
+resource_name = "Shake"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.02, 1.02), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, 0), Vector2(-10, 0), Vector2(2, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, -0.0174533, 0.00872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxc4r"]
+_data = {
+"RESET": SubResource("Animation_lonu8"),
+"Shake": SubResource("Animation_yta7o"),
+"Warning": SubResource("Animation_mr42t")
+}
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h86ou")
 
@@ -41,6 +237,12 @@ script = ExtResource("1_h86ou")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.219608, 0.486275, 0.682353, 1)
+
+[node name="Warning" type="ColorRect" parent="."]
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 0, 0, 0)
 
 [node name="Stats" type="Node2D" parent="."]
 position = Vector2(623, 45)
@@ -183,19 +385,39 @@ autostart = true
 
 [node name="double" type="Node2D" parent="Calendar"]
 
-[node name="Label" type="Label" parent="Calendar/double"]
+[node name="Sprite2D" type="Sprite2D" parent="Calendar/double"]
 z_index = 1
-offset_left = -40.0
-offset_top = -15.5
-offset_bottom = 15.5
-text = "2x"
-label_settings = SubResource("LabelSettings_c71qy")
+position = Vector2(-70, 0)
+rotation = -0.301942
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_0nqm3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Calendar/double"]
+libraries = {
+"": SubResource("AnimationLibrary_pr8ij")
+}
+
+[node name="Cool_light" type="Node2D" parent="."]
+position = Vector2(960, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Cool_light"]
+z_index = 1
+offset_left = -960.0
+offset_right = 960.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.223529)
+
+[node name="PointLight2D" type="PointLight2D" parent="Cool_light"]
+position = Vector2(0, 540)
+energy = 0.3
+texture = ExtResource("12_mswrh")
 
 [node name="Events" type="Node2D" parent="."]
 scale = Vector2(1.00107, 1)
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 2
+z_index = 2
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -257,6 +479,39 @@ autoplay = true
 [node name="Alarm" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("9_3x355")
 
+[node name="Metal" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_hgvws")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+ignore_rotation = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera2D")
+libraries = {
+"": SubResource("AnimationLibrary_bxc4r")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera2D")
+libraries = {
+"": SubResource("AnimationLibrary_bxc4r")
+}
+
+[node name="Score" type="Label" parent="."]
+offset_left = 61.0
+offset_top = 114.0
+offset_right = 273.0
+offset_bottom = 224.0
+theme_override_font_sizes/font_size = 80
+text = "Score: "
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="timeout" from="Calendar/Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="Calendar/double/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="PauseMenu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

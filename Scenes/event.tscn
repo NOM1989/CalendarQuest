@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/event.gd" id="1_mcg74"]
 [ext_resource type="AudioStream" uid="uid://c1j8cov2fmxvh" path="res://Sounds/click (1).wav" id="2_vqryu"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_skehe"]
+[sub_resource type="LabelSettings" id="LabelSettings_5drtd"]
 font_size = 64
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wg2ip"]
@@ -43,7 +43,7 @@ offset_right = 311.0
 offset_bottom = 45.5
 grow_vertical = 2
 text = "GO home"
-label_settings = SubResource("LabelSettings_skehe")
+label_settings = SubResource("LabelSettings_5drtd")
 vertical_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="."]

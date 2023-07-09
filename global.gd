@@ -15,3 +15,6 @@ const SPECIAL_LABELS = {
 const TYPES = ['family', 'friends', 'work']
 
 var volume = 80
+
+var score
+var tracks

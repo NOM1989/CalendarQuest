@@ -5,26 +5,36 @@ const LANE = preload("res://lane.tscn")
 const LINE = preload("res://line.tscn")
 
 const line_height = 20
-const track_height = (720 - line_height*(TRACKS-1)) / TRACKS
+
 var multiplier = 2
 var count = 0
 var double_lane = 0
 var double_life = 0
+var on_a_roll = false
+var score
 
-# Adjust for difficulty
-const TRACKS = 4
-const INTERVAL = 200
+# Adjust for difficulty     
+var TRACKS = 6
+var track_height = (720 - line_height*(global.tracks-1)) / global.tracks
+var INTERVAL = 100
 var EVENT_SPEED = 500
  
 @onready var stats = {
 	'family': 800,
 	'friends': 800,
 	'work': 800,
-	'rest': 800
+	'rest': 200
 }
 
 func _process(delta):
-	if Input.is_action_just_pressed("Exit"):
+	var too_low = 0
+	for stat in stats:
+		if stats[stat] < 50:
+			too_low += 1
+	if too_low > 1:
+		finish()
+	
+	if Input.is_action_just_pressed("Exit"): 
 		$PauseMenu.show()
 		get_tree().paused = true
 	if Input.is_action_just_pressed("Spawn"):
@@ -34,6 +44,20 @@ func _process(delta):
 		get_node("Stats/"+type+"/Bar").value = stats[type]
 	$Stats/rest/Bar.value = stats['rest']
 	
+	$Score.text = "Score: " + str(score)
+	
+	if on_a_roll:
+		score += 1
+	for stat in stats:
+		if stats[stat] > 800:
+			score += 2
+		elif stats[stat] > 400:
+			score += 1
+		elif stats[stat] < 200:
+			score -= 1
+		if stats[stat] < 100:
+			$AnimationPlayer.play("Warning")
+			
 	count += 1
 	# Prevents multiple being spawned in the same interval
 	var spawn_occured = 0
@@ -46,7 +70,7 @@ func _process(delta):
 		if randi_range(0, 4) == 4:
 			spawn_event()
 			spawn_occured = 1
-			
+	
 	# Run the double lane timer
 	if double_life:
 		double_life += 1
@@ -54,8 +78,27 @@ func _process(delta):
 			$Calendar/double.hide()
 			double_life = 0
 			double_lane = 0
+	
+	var total = 0
+	for stat in stats:
+		if stats[stat] < 200:
+			total = -3000
+		else:
+			total += stats[stat]
+	
+	if !on_a_roll and total > 2800:
+		intense_mode()
+	elif on_a_roll and total < 2800:
+		back_to_normal()
 
 func _ready():
+	TRACKS = global.tracks
+	score = 0
+	$Cool_light.hide()
+	$Calendar/double.hide()
+	$Sounds/BackgroundMusic.volume_db = -10
+	$Sounds/Alarm.volume_db = 10
+	$Sounds/Metal.volume_db = 0
 	$PauseMenu.hide()
 	for i in TRACKS:
 		var new_line = LINE.instantiate()
@@ -75,21 +118,27 @@ func spawn_event():
 	if available.size() > 0:
 		var event_instance = EVENT.instantiate()
 		randomize()
-		var selected_lane = available[randi() % available.size()]
+		var selected_lane = available[randi() % available.size()]  
 		event_instance.type = global.TYPES[randi() % global.TYPES.size()]
 		event_instance.height = track_height + 1
 		event_instance.position = get_node('Calendar/Lane' + str(selected_lane)).position
 		event_instance.TRACKS = TRACKS
 		event_instance.LANE = selected_lane
 		event_instance.speed = EVENT_SPEED
+		randomize()
+		if randi_range(1,50) == 1:
+			event_instance.special = true
+		else:
+			event_instance.special = false
 		$Events.add_child(event_instance)
 
 func spawn_double():
 	var lane = randi_range(1, TRACKS)
 	$Calendar/double.position = get_node('Calendar/Lane' + str(lane)).position
 	$Calendar/double.show()
+	$Calendar/double/AnimationPlayer.play("x2")
 	double_lane = lane
-	double_life = 1
+	double_life = 1  
 
 func _on_timer_timeout():
 	var areas = $Calendar/Point_check.get_overlapping_areas()
@@ -97,13 +146,13 @@ func _on_timer_timeout():
 		stats[type] -= 0.5 * multiplier
 		stats[type] = max(0, min(stats[type], 1000))
 		stats['rest'] = min(stats['rest'], 1000)
-		stats['rest'] = max(stats['rest'], 0)
+		stats['rest'] = max(stats['rest'], 0)              
 	if areas.size() == 0:
-		stats['rest'] += multiplier
+		stats['rest'] += 2*multiplier
 	elif areas.size() == 1:
 		var area = areas[0].get_parent()
 		var amount = 3
-		if area.LANE == double_lane:
+		if area.LANE == double_lane: 
 			amount = amount * 2
 		stats[area.type] += amount * multiplier
 		stats['rest'] -= multiplier
@@ -114,11 +163,42 @@ func _on_timer_timeout():
 
 
 func _on_exit_pressed():
-	get_tree().quit()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
 
-
+			
 func _on_resume_pressed():
 	global.volume = $PauseMenu/HSlider.value
 	$Sounds/BackgroundMusic.volume_db = global.volume*0.5 - 50
+	$Sounds/Alarm.volume_db = global.volume*0.5 - 30
+	$Sounds/Metal.volume_db = global.volume*0.5 - 40
 	$PauseMenu.hide()
 	get_tree().paused = false
+
+
+func _on_animation_player_animation_finished(anim_name):
+	$Calendar/double/AnimationPlayer.play("x2")
+
+func intense_mode():
+	$Cool_light.show()
+	on_a_roll = true
+	$Sounds/BackgroundMusic.playing = false
+	$Sounds/Metal.playing = true
+
+func back_to_normal():
+	$Cool_light.hide()
+	on_a_roll = false
+	$Sounds/BackgroundMusic.playing = true
+	$Sounds/Metal.playing = false
+
+func screen_shake():
+	$AnimationPlayer2.play("Shake")
+
+func finish():
+	global.score = score
+	get_tree().change_scene_to_file("res://Scenes/finished.tscn")
+
+
+func _on_timer_2_timeout():
+	INTERVAL -= 3
+	EVENT_SPEED += 50
