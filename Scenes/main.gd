@@ -16,7 +16,8 @@ var score
 # Adjust for difficulty     
 var TRACKS = 6
 var track_height = (720 - line_height*(global.tracks-1)) / global.tracks
-var INTERVAL = 100
+var INTERVAL = 90
+var extras_interval = int(80 - global.tracks * 10)
 var EVENT_SPEED = 500
  
 @onready var stats = {
@@ -37,14 +38,14 @@ func _process(delta):
 	if Input.is_action_just_pressed("Exit"): 
 		$PauseMenu.show()
 		get_tree().paused = true
-	if Input.is_action_just_pressed("Spawn"):
-		spawn_double()
+	#if Input.is_action_just_pressed("Spawn"):
+		#spawn_double()
 	
 	for type in global.TYPES:
 		get_node("Stats/"+type+"/Bar").value = stats[type]
 	$Stats/rest/Bar.value = stats['rest']
 	
-	$Score.text = "Score: " + str(score)
+	$Score.text = "Score " + str(score/10)
 	
 	if on_a_roll:
 		score += 1
@@ -65,12 +66,19 @@ func _process(delta):
 		spawn_event()
 		spawn_occured = 1
 		count = 0
-	if !spawn_occured && count % 40 == 0:
+		INTERVAL = max(INTERVAL - 1, 20)
+		EVENT_SPEED = min(EVENT_SPEED+5, 1500)
+		$ChallengeBar.value = ((90 - INTERVAL) * EVENT_SPEED * 100) / (70*1500)
+	if !spawn_occured && count % extras_interval == 0:
 		randomize()
 		if randi_range(0, 4) == 4:
 			spawn_event()
 			spawn_occured = 1
-	
+	if double_life == 0 && count % 20 == 0:
+		randomize()
+		if randi_range(0, 150) == 1:
+			spawn_double()
+		
 	# Run the double lane timer
 	if double_life:
 		double_life += 1
@@ -126,7 +134,7 @@ func spawn_event():
 		event_instance.LANE = selected_lane
 		event_instance.speed = EVENT_SPEED
 		randomize()
-		if randi_range(1,50) == 1:
+		if randi_range(1,35) == 1:
 			event_instance.special = true
 		else:
 			event_instance.special = false
@@ -195,10 +203,10 @@ func screen_shake():
 	$AnimationPlayer2.play("Shake")
 
 func finish():
-	global.score = score
+	global.score = score/10
 	get_tree().change_scene_to_file("res://Scenes/finished.tscn")
 
-
-func _on_timer_2_timeout():
-	INTERVAL -= 3
-	EVENT_SPEED += 50
+# Added more granular changes to game loop instead
+#func _on_timer_2_timeout():
+#	INTERVAL -= 3
+#	EVENT_SPEED += 50

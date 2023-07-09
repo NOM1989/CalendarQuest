@@ -11,30 +11,27 @@ offset_bottom = 1080.0
 color = Color(0.219608, 0.486275, 0.682353, 1)
 
 [node name="Back" type="Button" parent="."]
-offset_left = 22.0
-offset_top = 22.0
-offset_right = 298.0
-offset_bottom = 166.0
+offset_left = 828.0
+offset_top = 910.0
+offset_right = 1104.0
+offset_bottom = 1054.0
 theme_override_font_sizes/font_size = 64
 text = "Back"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 324.0
-offset_top = 108.0
-offset_right = 1865.0
-offset_bottom = 1099.0
+offset_left = 42.0
+offset_top = 33.0
+offset_right = 1903.0
+offset_bottom = 892.0
 theme_override_font_sizes/font_size = 44
-text = "Your secretary has organised your calendar, however she has overbooked you.
-Your job is to reduce the number of overlapping events and keep everyone happy.
-Balance your Family, Friends, Work and Rest to keep your life in order.
-If you lose any 2 at any point, the game ends.
-Stats increase if an event of that colour passes through the red bar.
-If multiple events pass through it together, you lose points in both.
-If there are no events, you gain rest.
-You delete events by clicking on them.
-Special events can not be deleted, they have red text.
-Press spacebar to add a 2x multiplier to a random lane, use this to maximise gains.
-Press escape to pause the game and change volume levels.
+text = "Oh no, your secretary has overbooked your calendar! You now have to take their place and get rid of overlapping events to keep everyone happy. Balance your Family, Friends, Work and Rest to keep your life in order.
+
+You have bars indicating the levels of each, if you empty any 2 at a time, the game ends. Stats increase if an event of matching colour passes through the red current time bar. If multiple events pass through together, you lose points in both categories. Having an empty calendar increases your rest.
+
+ • Remove events by clicking on them
+ • Special events can not be removed, they have red text
+ • A 2x multiplier can randomly appead in a lane, this doubles points gained in that lane
+ • Press escape to pause the game and change volume levels.
 "
 autowrap_mode = 2
 

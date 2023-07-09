@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://crrrxo652cnbb"]
+[gd_scene load_steps=4 format=3 uid="uid://crrrxo652cnbb"]
 
 [ext_resource type="Script" path="res://Scenes/menu.gd" id="1_4rp8a"]
+[ext_resource type="Texture2D" uid="uid://byjq8lpmak7jl" path="res://Sprites/Calendar.png" id="2_6e27e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dtww3"]
 font_size = 160
@@ -14,26 +15,26 @@ offset_bottom = 1080.0
 color = Color(0.219608, 0.486275, 0.682353, 1)
 
 [node name="Exit" type="Button" parent="."]
-offset_left = 1657.0
-offset_top = 923.0
-offset_right = 1891.0
-offset_bottom = 1060.0
+offset_left = 359.0
+offset_top = 693.0
+offset_right = 593.0
+offset_bottom = 830.0
 theme_override_font_sizes/font_size = 64
 text = "Exit"
 
 [node name="Play" type="Button" parent="."]
-offset_left = 460.0
-offset_top = 321.0
-offset_right = 1483.0
-offset_bottom = 799.0
+offset_left = 1027.0
+offset_top = 459.0
+offset_right = 1695.0
+offset_bottom = 771.0
 theme_override_font_sizes/font_size = 100
 text = "Play"
 
 [node name="How to play" type="Button" parent="."]
-offset_left = 38.0
-offset_top = 918.0
-offset_right = 472.0
-offset_bottom = 1054.0
+offset_left = 276.0
+offset_top = 486.0
+offset_right = 710.0
+offset_bottom = 622.0
 theme_override_font_sizes/font_size = 64
 text = "How to play"
 
@@ -41,30 +42,35 @@ text = "How to play"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -591.0
-offset_top = 17.0
-offset_right = 607.0
-offset_bottom = 239.0
+offset_left = -455.0
+offset_top = 105.0
+offset_right = 743.0
+offset_bottom = 327.0
 grow_horizontal = 2
 text = "Calendar Quest"
 label_settings = SubResource("LabelSettings_dtww3")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_left = 89.0
-offset_top = 501.0
-offset_right = 395.0
-offset_bottom = 517.0
-min_value = 1.0
+offset_left = 1346.0
+offset_top = 837.0
+offset_right = 1652.0
+offset_bottom = 853.0
+min_value = 3.0
 max_value = 6.0
-value = 6.0
+value = 5.0
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 148.0
-offset_top = 401.0
-offset_right = 332.0
-offset_bottom = 459.0
-theme_override_font_sizes/font_size = 40
+offset_left = 1082.0
+offset_top = 804.0
+offset_right = 1315.0
+offset_bottom = 876.0
+theme_override_font_sizes/font_size = 50
 text = "Difficulty:"
+
+[node name="Calendar" type="Sprite2D" parent="."]
+position = Vector2(344, 217)
+scale = Vector2(0.399167, 0.399167)
+texture = ExtResource("2_6e27e")
 
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
