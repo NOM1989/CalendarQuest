@@ -16,9 +16,9 @@ color = Color(0.219608, 0.486275, 0.682353, 1)
 
 [node name="Exit" type="Button" parent="."]
 offset_left = 359.0
-offset_top = 693.0
+offset_top = 787.0
 offset_right = 593.0
-offset_bottom = 830.0
+offset_bottom = 924.0
 theme_override_font_sizes/font_size = 64
 text = "Exit"
 
@@ -31,12 +31,20 @@ theme_override_font_sizes/font_size = 100
 text = "Play"
 
 [node name="How to play" type="Button" parent="."]
-offset_left = 276.0
-offset_top = 486.0
-offset_right = 710.0
-offset_bottom = 622.0
+offset_left = 271.0
+offset_top = 368.0
+offset_right = 705.0
+offset_bottom = 504.0
 theme_override_font_sizes/font_size = 64
 text = "How to play"
+
+[node name="Leaderboard" type="Button" parent="."]
+offset_left = 271.0
+offset_top = 573.0
+offset_right = 705.0
+offset_bottom = 709.0
+theme_override_font_sizes/font_size = 64
+text = "Leaderboard"
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 5
@@ -75,3 +83,4 @@ texture = ExtResource("2_6e27e")
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="How to play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]

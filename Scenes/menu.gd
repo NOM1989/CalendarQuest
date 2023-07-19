@@ -21,3 +21,7 @@ func _on_play_pressed():
 
 func _on_how_to_play_pressed():
 	get_tree().change_scene_to_file("res://Scenes/instructions.tscn")
+
+
+func _on_leaderboard_pressed():
+	get_tree().change_scene_to_file("res://addons/silent_wolf/Scores/Leaderboard.tscn")

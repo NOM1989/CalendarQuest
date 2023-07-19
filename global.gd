@@ -15,6 +15,15 @@ const SPECIAL_LABELS = {
 const TYPES = ['family', 'friends', 'work']
 
 var volume = 80
-
 var score
 var tracks
+
+func _ready():
+	SilentWolf.configure({
+		"api_key": "daguo0B6013jjhkrWjbsD7hk0lBNNG7Q1X5C4WXS",
+		"game_id": "calendarquest",
+		"log_level": 0
+	})
+	SilentWolf.scores_config = {
+	"open_scene_on_close": "res://Scenes/menu.tscn"
+}

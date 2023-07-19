@@ -28,6 +28,9 @@ var EVENT_SPEED = 500
 }
 
 func _process(delta):
+	if Input.is_action_just_pressed("ui_down"):
+		finish()
+	
 	var too_low = 0
 	for stat in stats:
 		if stats[stat] < 50:
@@ -104,9 +107,10 @@ func _ready():
 	score = 0
 	$Cool_light.hide()
 	$Calendar/double.hide()
-	$Sounds/BackgroundMusic.volume_db = -10
-	$Sounds/Alarm.volume_db = 10
-	$Sounds/Metal.volume_db = 0
+	$PauseMenu/HSlider.value = global.volume
+	$Sounds/BackgroundMusic.volume_db = global.volume*0.5 - 50
+	$Sounds/Alarm.volume_db = global.volume*0.5 - 30
+	$Sounds/Metal.volume_db = global.volume*0.5 - 40
 	$PauseMenu.hide()
 	for i in TRACKS:
 		var new_line = LINE.instantiate()

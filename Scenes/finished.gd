@@ -13,3 +13,9 @@ func _process(delta):
 
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+
+
+func _on_submit_score_pressed():
+	var name = $NameInput.text
+	SilentWolf.Scores.save_score(name, global.score)
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
